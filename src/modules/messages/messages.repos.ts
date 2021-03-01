@@ -3,7 +3,7 @@ import {
   MessageRepos,
   MessageInstance,
   MessageCode
-} from '../messages.interface';
+} from './messages.interface';
 
 export class MessageReposCache {
   private static instance: MessageReposCache;

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MessagesService } from './messages.service';
 
-import ExceptionTypes from './message-repos/exception-types.messages';
+import ExceptionTypes from './messages/exception-types.messages';
 
 describe('MessagesService', () => {
   let messagesService: MessagesService;

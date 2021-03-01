@@ -10,7 +10,7 @@ import {
   MessageReposObj
 } from './messages.interface';
 
-import { MessageReposCache } from './message-repos/messages.repos';
+import { MessageReposCache } from './messages.repos';
 
 @Injectable()
 export class MessagesService {

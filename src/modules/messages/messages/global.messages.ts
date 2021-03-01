@@ -1,6 +1,6 @@
 import { MessageRepos } from '../messages.interface';
 
-import { MessageReposCache } from './messages.repos';
+import { MessageReposCache } from '../messages.repos';
 
 enum Message {
   SYNCH_REQUEST_FAILED = 5000,

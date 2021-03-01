@@ -2,10 +2,12 @@ export type MessageCode = string | number;
 export type MessagePrimitive = string;
 export type MessageParams = Record<string, unknown>;
 
-export type MessageInstance = {
-  message: MessagePrimitive;
-  params?: MessageParams;
-};
+export type MessageInstance =
+  | {
+      message: MessagePrimitive;
+      params?: MessageParams;
+    }
+  | MessagePrimitive;
 
 export type ReposName = string;
 export type ReposDomain = string;
