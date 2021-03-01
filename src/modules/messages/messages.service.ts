@@ -1,5 +1,5 @@
 import async from 'async';
-import { template } from 'lodash';
+import { template, isString } from 'lodash';
 import { Injectable } from '@nestjs/common';
 
 import {
@@ -9,7 +9,8 @@ import {
   MessageRepos,
   MessageCode,
   MessageReposObj,
-  MessageInstance
+  MessageInstance,
+  MessageExtended
 } from './messages.interface';
 
 @Injectable()
@@ -44,7 +45,9 @@ export class MessagesService {
     const repos: MessageRepos = this.#repos;
     const msg = (repos as MessageReposObj)[messageCode];
     if (msg) {
-      return this.interpolateMessage(msg, params);
+      return isString(msg)
+        ? this.interpolateMessage(msg, params)
+        : this.interpolateMessage(msg.message, params);
     }
 
     throw new Error(`Failed to resolve message with code ${messageCode}`);
@@ -56,8 +59,11 @@ export class MessagesService {
     if (msg) {
       return {
         code: messageCode,
-        message: this.interpolateMessage(msg, params),
-        params
+        message: isString(msg)
+          ? this.interpolateMessage(msg, params)
+          : this.interpolateMessage(msg.message, params),
+        params,
+        logLevel: (msg as MessageExtended).logLevel || 'error'
       };
     }
 
