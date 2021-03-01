@@ -1,5 +1,6 @@
+import { Injectable } from '@nestjs/common';
 import { MessageRepos } from '../messages.interface';
-import { MessageReposCache } from '../messages.repos';
+import { MessagesService } from '../messages.service';
 
 enum Message {
   API_ERROR = 'api_error',
@@ -11,16 +12,21 @@ enum Message {
   INVALID_REQUEST_ERROR = 'invalid_request_error'
 }
 
-const repos: MessageRepos = {
-  api_error: 'Api server error',
-  validation_error: 'Validation error',
-  authentication_error: 'Authentication error',
-  api_connection_error: 'Api connection error',
-  rate_limit_error: 'Rate limit error occurred',
-  idempotency_error: 'Idempotency error occurred',
-  invalid_request_error: 'Invalid request error'
-};
+@Injectable()
+export class ExceptionTypesMessages {
+  private readonly repos: MessageRepos = {
+    api_error: 'Api server error',
+    validation_error: 'Validation error',
+    authentication_error: 'Authentication error',
+    api_connection_error: 'Api connection error',
+    rate_limit_error: 'Rate limit error occurred',
+    idempotency_error: 'Idempotency error occurred',
+    invalid_request_error: 'Invalid request error'
+  };
 
-Promise.resolve(MessageReposCache.registerRepos(repos));
+  constructor(private readonly messagesService: MessagesService) {
+    this.messagesService.registerRepos(this.repos);
+  }
+}
 
 export default Message;

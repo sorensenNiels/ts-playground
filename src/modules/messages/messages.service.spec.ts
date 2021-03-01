@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MessagesService } from './messages.service';
 
+import { ExceptionTypesMessages, GlobalMessages } from './messages';
+
 import ExceptionTypes from './messages/exception-types.messages';
 
 describe('MessagesService', () => {
@@ -9,7 +11,7 @@ describe('MessagesService', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [],
-      providers: [MessagesService]
+      providers: [MessagesService, ExceptionTypesMessages, GlobalMessages]
     }).compile();
 
     messagesService = app.get<MessagesService>(MessagesService);
