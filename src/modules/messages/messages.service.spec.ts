@@ -1,9 +1,9 @@
+import ExceptionTypes from './messages/exception-types.messages';
+
 import { Test, TestingModule } from '@nestjs/testing';
 import { MessagesService } from './messages.service';
 
 import { ExceptionTypesMessages, GlobalMessages } from './messages';
-
-import ExceptionTypes from './messages/exception-types.messages';
 
 describe('MessagesService', () => {
   let messagesService: MessagesService;
