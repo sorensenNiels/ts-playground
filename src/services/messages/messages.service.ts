@@ -1,6 +1,5 @@
 import async from 'async';
 import { template, isString } from 'lodash';
-import { Injectable } from '@nestjs/common';
 
 import {
   MessagePrimitive,
@@ -13,19 +12,25 @@ import {
   MessageExtended
 } from './messages.interface';
 
-@Injectable()
 export class MessagesService {
   #repos: MessageRepos = {};
+
+  private static instance: MessagesService;
+
+  public static getInstance(): MessagesService {
+    if (!MessagesService.instance) {
+      MessagesService.instance = new MessagesService();
+    }
+
+    return MessagesService.instance;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  private constructor() {}
 
   private interpolateMessage(str: string, params?: MessageParams) {
     const compiled = template(str);
     return compiled(params || {});
-  }
-
-  public async registerRepos(repos: MessageRepos): Promise<void> {
-    await async.eachOfLimit(repos, 1, async (message, code) => {
-      this.addMessageToRepos(code, message);
-    });
   }
 
   private addMessageToRepos(code: MessageCode, message: MessageInstance): void {
@@ -36,6 +41,16 @@ export class MessagesService {
     }
 
     this.#repos[code] = message;
+  }
+
+  public async registerRepos(repos: MessageRepos): Promise<void> {
+    await async.eachOfLimit(repos, 1, async (message, code) => {
+      this.addMessageToRepos(code, message);
+    });
+  }
+
+  public hasMessage(code: MessageCode): boolean {
+    return !!this.#repos[code];
   }
 
   getMessagePrimitive(
