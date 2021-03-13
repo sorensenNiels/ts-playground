@@ -1,5 +1,5 @@
-import { MessageRepos } from '../messages.interface';
-import { MessagesService } from '../messages.service';
+import { MessageRepos } from '../../services/messages/messages.interface';
+import { MessagesService } from '../../services/messages/messages.service';
 
 export enum ExceptionType {
   API_ERROR = 'api_error',

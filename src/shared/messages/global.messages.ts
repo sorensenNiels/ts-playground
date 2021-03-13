@@ -1,5 +1,5 @@
-import { MessageRepos } from '../messages.interface';
-import { MessagesService } from '../messages.service';
+import { MessageRepos } from '../../services/messages/messages.interface';
+import { MessagesService } from '../../services/messages/messages.service';
 
 export enum GlobalMessage {
   SYNCH_REQUEST_FAILED = 'synch_request_failed',
@@ -18,23 +18,15 @@ export enum GlobalMessage {
 const repos: MessageRepos = {
   synch_request_failed: 'Request to Synchronicer back-end failed - ${msg}',
   synch_no_response: 'No response returned from Synchronicer - ${msg}',
-  synch_response_not_successful:
-    'Response received from Synchronicer did not return status equal "success"',
-  synch_xml_parse_failed:
-    'Failed to parse XML document provided by Synchronicer back-end - ${msg}',
-  synch_invalid_http_status:
-    'Invalid HTTP status returned by Synchronicer - ${status}',
-  synch_failed_to_obtain_internal_access_token:
-    'Failed to obtain internal access token',
-  synch_failed_to_validate_access_token:
-    'Failed to validate access token - ${accessToken}',
-  synch_failed_to_update_reference_table:
-    'Failed to update reference table - ${msg}',
-  synch_reference_table_has_no_rows:
-    'Reference table does not hold any rows - ${referenceTableId}',
+  synch_response_not_successful: 'Response received from Synchronicer did not return status equal "success"',
+  synch_xml_parse_failed: 'Failed to parse XML document provided by Synchronicer back-end - ${msg}',
+  synch_invalid_http_status: 'Invalid HTTP status returned by Synchronicer - ${status}',
+  synch_failed_to_obtain_internal_access_token: 'Failed to obtain internal access token',
+  synch_failed_to_validate_access_token: 'Failed to validate access token - ${accessToken}',
+  synch_failed_to_update_reference_table: 'Failed to update reference table - ${msg}',
+  synch_reference_table_has_no_rows: 'Reference table does not hold any rows - ${referenceTableId}',
   synch_failed_to_parse_access_token: 'Failed to parse access token',
-  synch_response_returned_error:
-    'Response received from Synchronicer was in error - ${messages}'
+  synch_response_returned_error: 'Response received from Synchronicer was in error - ${messages}'
 };
 
 const messagesService = MessagesService.getInstance();

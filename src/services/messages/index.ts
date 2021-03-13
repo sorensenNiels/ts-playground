@@ -2,4 +2,4 @@ export * from './messages.interface';
 
 export * from './messages.service';
 
-export * from './systemMessages';
+export * from '../../shared/messages';
