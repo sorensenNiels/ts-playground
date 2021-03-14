@@ -1,5 +1,5 @@
-import { MessageRepos } from '../../services/messages/messages.interface';
-import { MessagesService } from '../../services/messages/messages.service';
+import { MessageRepos } from '../services/messages/messages.interface';
+import { MessagesService } from '../services/messages/messages.service';
 
 export enum GlobalMessage {
   SYNCH_REQUEST_FAILED = 'synch_request_failed',
