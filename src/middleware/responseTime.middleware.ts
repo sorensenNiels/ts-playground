@@ -1,14 +1,16 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, NestMiddleware, Logger } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import responseTime from 'response-time';
+import responseTime, { ResponseTimeOptions } from '../packages/response-time';
 
 @Injectable()
 export class ResponseTimeMiddleware implements NestMiddleware {
-  public static configure(opts: responseTime.ResponseTimeOptions): void {
+  private readonly logger = new Logger(ResponseTimeMiddleware.name);
+
+  public static configure(opts: ResponseTimeOptions): void {
     this.options = opts;
   }
 
-  private static options: responseTime.ResponseTimeOptions;
+  private static options: ResponseTimeOptions;
 
   // eslint-disable-next-line class-methods-use-this
   public use(req: Request, res: Response, next: NextFunction): void {
